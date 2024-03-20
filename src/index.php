@@ -1,5 +1,6 @@
 <?php
 
+exit("hello index.php");
 
 $action = $_GET["action"];
 $controller = $_GET["controller"];
