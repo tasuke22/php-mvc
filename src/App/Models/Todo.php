@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use PDO;
+
 class Todo
 {
     public function getData(): array

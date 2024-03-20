@@ -2,11 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Models\Todo;
+
 class Todos
 {
     public function index(): void
     {
-        $model = new \App\Models\Todo;
+        $model = new Todo;
         $todos = $model->getData();
 
         require 'views/todos_index.php';
