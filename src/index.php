@@ -1,8 +1,6 @@
 <?php
 
-require 'model.php';
+require "controller.php";
 
-$model = new Model();
-$todos = $model->getData();
-
-require 'view.php';
+$controller = new Controller();
+$controller->index();
