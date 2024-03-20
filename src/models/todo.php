@@ -1,6 +1,6 @@
 <?php
 
-class Model
+class Todo
 {
     public function getData(): array
     {

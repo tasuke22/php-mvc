@@ -1,6 +1,6 @@
 <?php
 
-require "controller.php";
+require 'controllers/todos.php';
 
-$controller = new Controller();
+$controller = new Todos();
 $controller->index();
