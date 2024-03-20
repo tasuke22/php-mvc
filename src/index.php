@@ -1,14 +1,13 @@
 <?php
 
-require 'controllers/todos.php';
-
-$controller = new Todos();
 
 $action = $_GET["action"];
+$controller = $_GET["controller"];
 
-if ($action === "index") {
-    $controller->index();
-} elseif ($action === "show") {
-    $controller->show();
+if ($controller === "todos") {
+    require 'controllers/todos.php';
+    $controller_object = new Todos();
+} elseif ($controller === "home") {
+    require 'controllers/home.php';
+    $controller_object = new Home();
 }
-$controller->show();
