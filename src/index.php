@@ -1,15 +1,20 @@
 <?php
 
-echo '<h1>Hello World</h1>';
+$host = 'db'; // MySQLコンテナのサービス名
+$dbname = "mydatabase";
+$username = "myuser";
+$password = "mypassword";
 
-$hoge = [
-    'name' => 'hoge',
-    'age' =>"20",
-    'profile' => 'hogehoge',
-    'status' => 'yes',
-];
+# 新しいPDOオブジェクトを作成し、MySQLデータベースに接続
+$db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
 
-foreach ($hoge as $item) {
-    echo $item;
-    echo '<br>';
+# SQL　文を実行
+$stmt = $db->prepare('SELECT * FROM todos');
+$stmt->execute();
+
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($results as $result) {
+    echo $result['title'] . "<br>" . $result['description'];
+
 }
