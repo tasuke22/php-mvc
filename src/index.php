@@ -20,9 +20,7 @@ if (!$params) {
 }
 
 $action = $params["action"];
-$controller = $params["controller"];
-
-require "controllers/$controller.php";
+$controller = "App\Controllers\\" . ucwords($params["controller"]);
 
 $controller_object = new $controller;
 
