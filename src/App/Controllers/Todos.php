@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Controllers;
+
 class Todos
 {
     public function index(): void

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 class Todo
 {
     public function getData(): array
@@ -16,7 +18,7 @@ class Todo
         $stmt = $db->prepare('SELECT * FROM todos');
         $stmt->execute();
 
-        return  $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 
