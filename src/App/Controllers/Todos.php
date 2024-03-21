@@ -14,8 +14,9 @@ class Todos
         require 'views/todos_index.php';
     }
 
-    public function show(): void
+    public function show(string $id): void
     {
+        var_dump($id);
         require "views/todos_show.php";
     }
 }
