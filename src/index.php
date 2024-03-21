@@ -8,6 +8,7 @@ spl_autoload_register(function (string $class_name) {
 
 $router = new Framework\Router;
 
+$router->add("/admin/{controller}/{action}", ["namespace" => "Admin"]);
 $router->add("/{title}/{id:\d+}/{page:\d+}", ["controller" => "todos", "action" => "showPage"]);
 $router->add("/todo/{slug:[\w-]+}", ["controller" => "todos", "action" => "show"]);
 $router->add("/{controller}/{id:\d+}/{action}");
