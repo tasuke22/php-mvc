@@ -15,17 +15,5 @@ $router->add("/todos", ["controller" => "todos", "action" => "index"]);
 $router->add("/", ["controller" => "home", "action" => "index"]);
 $router->add("/{controller}/{action}");
 
-$params = $router->match($path);
-
-if (!$params) {
-    exit("Route not found");
-}
-
-$action = $params["action"];
-$controller = "App\Controllers\\" . ucwords($params["controller"]);
-
-$controller_object = new $controller;
-
-$controller_object->$action();
-
 $dispatcher = new Framework\Dispatcher($router);
+$dispatcher->handle($path);

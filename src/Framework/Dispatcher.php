@@ -7,4 +7,22 @@ class Dispatcher
     public function __construct(private Router $router)
     {
     }
+
+    public function handle(string $path)
+    {
+
+        $params = $this->router->match($path);
+
+        if (!$params) {
+            exit("Route not found");
+        }
+
+        $action = $params["action"];
+        $controller = "App\Controllers\\" . ucwords($params["controller"]);
+
+        $controller_object = new $controller;
+
+        $controller_object->$action();
+
+    }
 }
