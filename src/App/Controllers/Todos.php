@@ -13,7 +13,7 @@ class Todos
         $todos = $model->getData();
 
         $viewer = new Viewer();
-        $viewer->render('todos_index.php', [
+        echo $viewer->render('todos_index.php', [
             'todos' => $todos
         ]);
     }
