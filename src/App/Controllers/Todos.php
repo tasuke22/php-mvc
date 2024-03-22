@@ -13,8 +13,7 @@ class Todos
         $todos = $model->getData();
 
         $viewer = new Viewer();
-
-        require 'views/todos_index.php';
+        $viewer->render('todos_index.php', $todos);
     }
 
     public function show(string $id): void
