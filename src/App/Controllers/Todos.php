@@ -7,28 +7,29 @@ use Framework\Viewer;
 
 class Todos
 {
+    public function __construct(private Viewer $viewer)
+    {
+    }
+
     public function index(): void
     {
         $model = new Todo;
         $todos = $model->getData();
 
-        $viewer = new Viewer();
-        echo $viewer->render("shared/header.php", [
+        echo $this->viewer->render("shared/header.php", [
             'title' => 'Todos'
         ]);
-        echo $viewer->render('Todos/index.php', [
+        echo $this->viewer->render('Todos/index.php', [
             'todos' => $todos
         ]);
     }
 
     public function show(string $id): void
     {
-        $viewer = new Viewer();
-
-        echo $viewer->render("shared/header.php", [
+        echo $this->viewer->render("shared/header.php", [
             'title' => 'Todos'
         ]);
-        echo $viewer->render('Todos/show.php', [
+        echo $this->viewer->render('Todos/show.php', [
             'id' => $id
         ]);
     }
