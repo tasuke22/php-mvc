@@ -18,5 +18,10 @@ $router->add("/", ["controller" => "home", "action" => "index"]);
 $router->add("/{controller}/{action}");
 
 $container = new Framework\Container;
+
+$database = new App\Database("db", "mydatabase", "myuser", "mypassword");
+
+$container->set(App\Database::class, $database);
+
 $dispatcher = new Framework\Dispatcher($router, $container);
 $dispatcher->handle($path);

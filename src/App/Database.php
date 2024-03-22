@@ -22,8 +22,12 @@ class Database
         $username = $this->username;
         $password = $this->password;
 
+        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
+
         # 新しいPDOオブジェクトを作成し、MySQLデータベースに接続
-        return new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+        return new PDO($dsn, $username, $password, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        ]);
     }
 
 }
