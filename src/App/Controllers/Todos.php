@@ -13,7 +13,9 @@ class Todos
         $todos = $model->getData();
 
         $viewer = new Viewer();
-        $viewer->render('todos_index.php', $todos);
+        $viewer->render('todos_index.php', [
+            'todos' => $todos
+        ]);
     }
 
     public function show(string $id): void
