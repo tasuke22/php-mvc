@@ -2,7 +2,6 @@
 
 namespace Framework;
 
-use App\Models\Todo;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -28,14 +27,15 @@ class Dispatcher
 
         $constructor =  $reflector->getConstructor();
 
+        $dependencies = [];
         if ($constructor !== null) {
             foreach ($constructor->getParameters() as $parameter) {
                 $type = (string) $parameter->getType();
-                var_dump($type);
+                $dependencies[] = new $type;
             }
         }
 
-        $controller_object = new $controller(new Viewer, new Todo);
+        $controller_object = new $controller(...$dependencies);
 
         $args = $this->getActionArguments($controller, $action, $params);
 
