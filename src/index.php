@@ -20,9 +20,9 @@ $router->add("/{controller}/{action}");
 $container = new Framework\Container;
 
 
-$container->set(App\Database::class, function () {
-    return new App\Database("db", "mydatabase", "myuser", "mypassword");
-});
+//$container->set(App\Database::class, function () {
+//    return new App\Database("db", "mydatabase", "myuser", "mypassword");
+//});
 
 $dispatcher = new Framework\Dispatcher($router, $container);
 $dispatcher->handle($path);
