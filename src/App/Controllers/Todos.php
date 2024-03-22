@@ -7,14 +7,13 @@ use Framework\Viewer;
 
 class Todos
 {
-    public function __construct(private Viewer $viewer)
+    public function __construct(private Viewer $viewer, private Todo $model)
     {
     }
 
     public function index(): void
     {
-        $model = new Todo;
-        $todos = $model->getData();
+        $todos = $this->model->getData();
 
         echo $this->viewer->render("shared/header.php", [
             'title' => 'Todos'
