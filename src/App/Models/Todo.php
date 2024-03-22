@@ -2,19 +2,15 @@
 
 namespace App\Models;
 
+use App\Database;
 use PDO;
 
 class Todo
 {
     public function getData(): array
     {
-        $host = 'db'; // MySQLコンテナのサービス名
-        $dbname = "mydatabase";
-        $username = "myuser";
-        $password = "mypassword";
-
-        # 新しいPDOオブジェクトを作成し、MySQLデータベースに接続
-        $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+        $pdo = new Database;
+        $db = $pdo->getConnection();
 
         # SQL　文を実行
         $stmt = $db->prepare('SELECT * FROM todos');
