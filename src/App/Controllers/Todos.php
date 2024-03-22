@@ -3,11 +3,10 @@
 namespace App\Controllers;
 
 use App\Models\Todo;
-use Framework\Viewer;
 
 class Todos
 {
-    public function __construct(private Viewer $viewer, private Todo $model)
+    public function __construct(private  $viewer, private Todo $model)
     {
     }
 
