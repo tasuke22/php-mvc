@@ -13,7 +13,9 @@ class Todos
         $todos = $model->getData();
 
         $viewer = new Viewer();
-        echo $viewer->render("shared/header.php");
+        echo $viewer->render("shared/header.php", [
+            'title' => 'Todos'
+        ]);
         echo $viewer->render('Todos/index.php', [
             'todos' => $todos
         ]);
@@ -23,7 +25,9 @@ class Todos
     {
         $viewer = new Viewer();
 
-        echo $viewer->render("shared/header.php");
+        echo $viewer->render("shared/header.php", [
+            'title' => 'Todos'
+        ]);
         echo $viewer->render('Todos/show.php', [
             'id' => $id
         ]);
