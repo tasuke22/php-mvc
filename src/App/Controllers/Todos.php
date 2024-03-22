@@ -13,15 +13,18 @@ class Todos
         $todos = $model->getData();
 
         $viewer = new Viewer();
-        echo $viewer->render('todos_index.php', [
+        echo $viewer->render('Todos/index.php', [
             'todos' => $todos
         ]);
     }
 
     public function show(string $id): void
     {
-        var_dump($id);
-        require "views/todos_show.php";
+        $viewer = new Viewer();
+
+        echo $viewer->render('Todos/show.php', [
+            'id' => $id
+        ]);
     }
 
     public function showPage(string $title, string $id, string $page)
