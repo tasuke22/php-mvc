@@ -1,7 +1,9 @@
 <?php
 
 namespace Framework;
+
 use App\Models\Todo;
+use ReflectionClass;
 use ReflectionMethod;
 
 class Dispatcher
@@ -21,6 +23,17 @@ class Dispatcher
 
         $action = $this->getActionName($params);
         $controller = $this->getControllerName($params);
+
+        $reflector = new ReflectionClass($controller);
+
+        $constructor =  $reflector->getConstructor();
+
+        if ($constructor !== null) {
+            foreach ($constructor->getParameters() as $parameter) {
+                $type = (string) $parameter->getType();
+                var_dump($type);
+            }
+        }
 
         $controller_object = new $controller(new Viewer, new Todo);
 
