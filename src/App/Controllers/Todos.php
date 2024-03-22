@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Todo;
+use Framework\Viewer;
 
 class Todos
 {
@@ -10,6 +11,8 @@ class Todos
     {
         $model = new Todo;
         $todos = $model->getData();
+
+        $viewer = new Viewer();
 
         require 'views/todos_index.php';
     }
