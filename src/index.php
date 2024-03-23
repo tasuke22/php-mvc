@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Framework\Exceptions\PageNotFoundException;
+
 set_error_handler(function (
     int    $errno,
     string $errstr,
@@ -13,6 +15,11 @@ set_error_handler(function (
 });
 
 set_exception_handler(function (Throwable $exception) {
+    if ($exception instanceof PageNotFoundException) {
+        http_response_code(404);
+    } else {
+        http_response_code(500);
+    }
     $show_errors = true;
     if ($show_errors) {
         ini_set("display_errors", "1");
@@ -37,7 +44,7 @@ spl_autoload_register(function (string $class_name) {
     require str_replace("\\", "/", $class_name) . ".php";
 });
 
-$router = new Framework\outer;
+$router = new Framework\Router;
 
 $router->add("/admin/{controller}/{action}", ["namespace" => "Admin"]);
 $router->add("/{title}/{id:\d+}/{page:\d+}", ["controller" => "todos", "action" => "showPage"]);
