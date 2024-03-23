@@ -25,11 +25,12 @@ class Todos
 
     public function show(string $id): void
     {
+        $todo = $this->model->find($id);
         echo $this->viewer->render("shared/header.php", [
             'title' => 'Todos'
         ]);
         echo $this->viewer->render('Todos/show.php', [
-            'id' => $id
+            'todo' => $todo
         ]);
     }
 
