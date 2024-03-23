@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 use Framework\Exceptions\PageNotFoundException;
 
-set_error_handler(function (
-    int    $errno,
-    string $errstr,
-    string $errfile,
-    int    $errline
-): bool
-{
-    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+spl_autoload_register(function (string $class_name) {
+    require str_replace("\\", "/", $class_name) . ".php";
 });
+
+set_error_handler("Framework\ErrorHandler::handleError");
 
 set_exception_handler(function (Throwable $exception) {
     if ($exception instanceof PageNotFoundException) {
@@ -22,7 +18,7 @@ set_exception_handler(function (Throwable $exception) {
         http_response_code(500);
         $template = "500.php";
     }
-    $show_errors = false;
+    $show_errors = true;
     if ($show_errors) {
         ini_set("display_errors", "1");
     } else {
@@ -42,9 +38,6 @@ if ($path === false) {
     throw new UnexpectedValueException("Malformed URL: '$_SERVER[REQUEST_URI]'");
 }
 
-spl_autoload_register(function (string $class_name) {
-    require str_replace("\\", "/", $class_name) . ".php";
-});
 
 $router = new Framework\Router;
 
