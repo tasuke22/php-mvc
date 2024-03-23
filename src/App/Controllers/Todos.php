@@ -14,7 +14,7 @@ class Todos
 
     public function index(): void
     {
-        $todos = $this->model->getData();
+        $todos = $this->model->findAll();
 
         echo $this->viewer->render("shared/header.php", [
             'title' => 'Todos'
