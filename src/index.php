@@ -17,17 +17,19 @@ set_error_handler(function (
 set_exception_handler(function (Throwable $exception) {
     if ($exception instanceof PageNotFoundException) {
         http_response_code(404);
+        $template = "404.php";
     } else {
         http_response_code(500);
+        $template = "500.php";
     }
-    $show_errors = true;
+    $show_errors = false;
     if ($show_errors) {
         ini_set("display_errors", "1");
     } else {
         ini_set("display_errors", "0");
         ini_set("log_errors", "1");
 
-        require "views/500.php";
+        require "views/$template";
     }
 
     throw $exception;
