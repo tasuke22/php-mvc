@@ -9,6 +9,8 @@ use PDO;
 
 abstract class Model
 {
+    protected $table;
+
     public function __construct(private Database $db)
     {
     }
@@ -16,8 +18,9 @@ abstract class Model
     {
         $pdo = $this->db->getConnection();
 
+        $sql = "SELECT * FROM $this->table";
         # SQL　文を実行
-        $stmt = $pdo->prepare('SELECT * FROM todos');
+        $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +30,7 @@ abstract class Model
     {
         $conn = $this->db->getConnection();
 
-        $sql = "SELECT * FROM todos WHERE id = :id";
+        $sql = "SELECT * FROM $this->table WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
