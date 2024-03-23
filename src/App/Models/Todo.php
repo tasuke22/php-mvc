@@ -23,7 +23,7 @@ class Todo
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function find(string $id)
+    public function find(string $id): array|bool
     {
         $conn = $this->db->getConnection();
 

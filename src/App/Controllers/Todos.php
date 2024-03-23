@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Todo;
+use Framework\Exceptions\PageNotFoundException;
 use Framework\Viewer;
 
 class Todos
@@ -26,6 +27,11 @@ class Todos
     public function show(string $id): void
     {
         $todo = $this->model->find($id);
+
+        if (!$todo) {
+            throw new PageNotFoundException();
+        }
+
         echo $this->viewer->render("shared/header.php", [
             'title' => 'Todos'
         ]);
