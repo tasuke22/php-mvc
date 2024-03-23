@@ -35,7 +35,7 @@ class ErrorHandler
             ini_set("display_errors", "0");
             ini_set("log_errors", "1");
 
-            require "views/$template";
+            require dirname(__DIR__) . "/views/$template";
         }
 
         throw $exception;
