@@ -11,6 +11,16 @@ abstract class Model
 {
     protected $table;
 
+    private function getTable(): string
+    {
+        if ($this->table !== null) {
+            return $this->table;
+        }
+        // 一旦、Modelのクラス名 + s でテーブル名を作成
+        $parts = explode('\\', $this::class . "s");
+        return strtolower(array_pop($parts));
+    }
+
     public function __construct(private Database $db)
     {
     }
@@ -18,7 +28,7 @@ abstract class Model
     {
         $pdo = $this->db->getConnection();
 
-        $sql = "SELECT * FROM $this->table";
+        $sql = "SELECT * FROM {$this->getTable()}";
         # SQL　文を実行
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -30,7 +40,7 @@ abstract class Model
     {
         $conn = $this->db->getConnection();
 
-        $sql = "SELECT * FROM $this->table WHERE id = :id";
+        $sql = "SELECT * FROM {$this->getTable()} WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
