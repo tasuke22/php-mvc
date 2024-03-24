@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="js">
 <head>
   <title><?= $title ?></title>
-  <link rel="stylesheet" href="/public/example.css">
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </head>
+<body>

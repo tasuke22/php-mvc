@@ -1,5 +1,7 @@
 <h1>Todos</h1>
 
+<a href="/todos/new">New Todo</a>
+
 <body>
 
 <?php foreach ($todos as $todo): ?>

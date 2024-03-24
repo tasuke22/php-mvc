@@ -44,5 +44,14 @@ class Todos
     {
         echo $title . " " . $id . " " . $page;
     }
+
+    public function new()
+    {
+        $this->viewer->render("shared/header.php", [
+            'title' => 'New Todo'
+        ]);
+
+        echo $this->viewer->render('Todos/new.php');
+    }
 }
 
