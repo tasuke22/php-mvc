@@ -92,5 +92,35 @@ class Todos
             ]);
         }
     }
+
+    public function update(string $id)
+    {
+        $todo = $this->model->find($id);
+
+        if (!$todo) {
+            throw new PageNotFoundException();
+        }
+
+        $data = [
+            'title' => $_POST['title'],
+            'description' => empty($_POST['description']) ? null : $_POST['description'],
+            'completed' => $_POST['completed'],
+            'user_id' => $_POST['user_id'],
+        ];
+
+        if ($this->model->update($id, $data)) {
+            header("Location: /todos/$id/show");
+            exit;
+        } else {
+            echo $this->viewer->render("shared/header.php", [
+                'title' => 'Edit Todo'
+            ]);
+
+            echo $this->viewer->render('Todos/edit.php', [
+                'errors' => $this->model->getErrors(),
+                "todo" => $todo
+            ]);
+        }
+    }
 }
 
