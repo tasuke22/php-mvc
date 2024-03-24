@@ -62,9 +62,18 @@ class Todos
             'completed' => $_POST['completed'],
             'user_id' => $_POST['user_id'],
         ];
-        var_dump($this->model->insert($data));
 
-        print_r($this->model->getErrors());
+        if ($this->model->insert($data)) {
+            echo "record saved";
+        } else {
+            echo $this->viewer->render("shared/header.php", [
+                'title' => 'New Todo'
+            ]);
+
+            echo $this->viewer->render('Todos/new.php',  [
+                'errors' => $this->model->getErrors()
+            ]);
+        }
     }
 }
 

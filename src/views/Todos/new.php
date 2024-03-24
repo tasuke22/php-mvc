@@ -5,6 +5,10 @@
   <lable for="title">Title</lable>
   <input type="text" name="title" id="title">
 
+  <?php if (isset($errors['title'])): ?>
+    <p><?= $errors['title'] ?></p>
+  <?php endif; ?>
+
   <label for="description">Description</label>
   <textarea name="description" id="description"></textarea>
 
