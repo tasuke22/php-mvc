@@ -56,7 +56,12 @@ abstract class Model
         $user_id = "860c602c-2b99-48b3-82b7-253f52ad9c7e";
         $completed = 0;
 
-        $sql = "INSERT INTO {$this->getTable()} (title, description, completed, user_id) VALUES (?, ?, ?, ?)";
+        $columns = implode(", ", array_keys($data));
+        $placeholders =  implode(", ", array_fill(0, count($data), "?"));
+
+        $sql = "INSERT INTO {$this->getTable()} ($columns) VALUES ($placeholders)";
+
+        exit($sql);
         $conn = $this->db->getConnection();
 
         $stmt = $conn->prepare($sql);
