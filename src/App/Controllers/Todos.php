@@ -136,6 +136,12 @@ class Todos
     {
         $todo = $this->getTodo($id);
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->model->delete($id);
+            header("Location: /todos/index");
+            exit;
+        }
+
         echo $this->viewer->render("shared/header.php", [
             'title' => 'Delete Todo'
         ]);
