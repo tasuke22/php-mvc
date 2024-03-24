@@ -2,6 +2,10 @@
 <p><?= $todo["description"] ?></p>
 
 <p>
+  <a href="/todos/?>">to Index</a>
+</p>
+
+<p>
   <a href="/todos/<?= $todo["id"] ?>/edit">Edit</a>
 </p>
 
