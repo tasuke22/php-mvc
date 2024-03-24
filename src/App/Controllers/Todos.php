@@ -26,7 +26,7 @@ class Todos
 
     public function show(string $id): void
     {
-        $todo = $this->model->find($id);
+        $todo = $this->getTodo($id);
 
         if (!$todo) {
             throw new PageNotFoundException();
@@ -42,7 +42,7 @@ class Todos
 
     public function edit(string $id): void
     {
-        $todo = $this->model->find($id);
+        $todo = $this->getTodo($id);
 
         if (!$todo) {
             throw new PageNotFoundException();
@@ -54,6 +54,16 @@ class Todos
         echo $this->viewer->render('Todos/edit.php', [
             'todo' => $todo
         ]);
+    }
+
+    private function getTodo(string $id): array
+    {
+        $todo = $this->model->find($id);
+
+        if (!$todo) {
+            throw new PageNotFoundException();
+        }
+        return $todo;
     }
 
     public function showPage(string $title, string $id, string $page)
@@ -96,7 +106,7 @@ class Todos
 
     public function update(string $id)
     {
-        $todo = $this->model->find($id);
+        $todo = $this->getTodo($id);
 
         if (!$todo) {
             throw new PageNotFoundException();
