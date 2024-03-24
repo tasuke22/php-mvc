@@ -3,18 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\Todo;
+use Framework\Controller;
 use Framework\Exceptions\PageNotFoundException;
-use Framework\Request;
 use Framework\Viewer;
 
-class Todos
+class Todos extends Controller
 {
-    private Request $request;
-
-    public function setRequest(Request $request): void
-    {
-        $this->request = $request;
-    }
 
     public function __construct(private Viewer $viewer, private Todo $model)
     {
