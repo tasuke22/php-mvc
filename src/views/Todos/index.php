@@ -2,6 +2,8 @@
 
 <a href="/todos/new">New Todo</a>
 
+<p>Total: <?= $total ?></p>
+
 <body>
 
 <?php foreach ($todos as $todo): ?>

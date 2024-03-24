@@ -20,7 +20,8 @@ class Todos
             'title' => 'Todos'
         ]);
         echo $this->viewer->render('Todos/index.php', [
-            'todos' => $todos
+            'todos' => $todos,
+            "total" => $this->model->getTotal()
         ]);
     }
 

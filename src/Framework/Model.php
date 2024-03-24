@@ -82,7 +82,7 @@ abstract class Model
         return strtolower(array_pop($parts));
     }
 
-    public function __construct(private Database $db)
+    public function __construct(protected Database $db)
     {
     }
 
