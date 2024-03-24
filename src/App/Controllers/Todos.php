@@ -4,10 +4,18 @@ namespace App\Controllers;
 
 use App\Models\Todo;
 use Framework\Exceptions\PageNotFoundException;
+use Framework\Request;
 use Framework\Viewer;
 
 class Todos
 {
+    private Request $request;
+
+    public function setRequest(Request $request): void
+    {
+        $this->request = $request;
+    }
+
     public function __construct(private Viewer $viewer, private Todo $model)
     {
     }
@@ -84,10 +92,10 @@ class Todos
     public function create()
     {
         $data = [
-            'title' => $_POST['title'],
-            'description' => empty($_POST['description']) ? null : $_POST['description'],
-            'completed' => $_POST['completed'],
-            'user_id' => $_POST['user_id'],
+            'title' => $this->request->post['title'],
+            'description' => empty($this->request->post['description']) ? null : $this->request->post['description'],
+            'completed' => $this->request->post['completed'],
+            'user_id' => $this->request->post['user_id'],
         ];
 
         if ($this->model->insert($data)) {
@@ -113,10 +121,10 @@ class Todos
             throw new PageNotFoundException();
         }
 
-        $todo['title'] = $_POST['title'];
-        $todo['description'] = $_POST['description'];
-        $todo['completed'] = $_POST['completed'];
-        $todo['user_id'] = $_POST['user_id'];
+        $todo['title'] = $this->request->post['title'];
+        $todo['description'] = $this->request->post['description'];
+        $todo['completed'] = $this->request->post['completed'];
+        $todo['user_id'] = $this->request->post['user_id'];
 
         if ($this->model->update($id, $todo)) {
             header("Location: /todos/$id/show");
