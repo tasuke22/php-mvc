@@ -64,6 +64,7 @@ class Todos
         ];
         var_dump($this->model->insert($data));
 
+        print_r($this->model->getErrors());
     }
 }
 
