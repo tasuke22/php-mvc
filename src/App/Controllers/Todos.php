@@ -131,5 +131,18 @@ class Todos
             ]);
         }
     }
+
+    public function delete(string $id): void
+    {
+        $todo = $this->getTodo($id);
+
+        echo $this->viewer->render("shared/header.php", [
+            'title' => 'Delete Todo'
+        ]);
+
+        echo $this->viewer->render('Todos/delete.php', [
+            'todo' => $todo
+        ]);
+    }
 }
 
