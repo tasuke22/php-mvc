@@ -88,7 +88,8 @@ class Todos
             ]);
 
             echo $this->viewer->render('Todos/new.php', [
-                'errors' => $this->model->getErrors()
+                'errors' => $this->model->getErrors(),
+                'todo' => $data
             ]);
         }
     }
@@ -101,14 +102,12 @@ class Todos
             throw new PageNotFoundException();
         }
 
-        $data = [
-            'title' => $_POST['title'],
-            'description' => empty($_POST['description']) ? null : $_POST['description'],
-            'completed' => $_POST['completed'],
-            'user_id' => $_POST['user_id'],
-        ];
+        $todo['title'] = $_POST['title'];
+        $todo['description'] = $_POST['description'];
+        $todo['completed'] = $_POST['completed'];
+        $todo['user_id'] = $_POST['user_id'];
 
-        if ($this->model->update($id, $data)) {
+        if ($this->model->update($id, $todo)) {
             header("Location: /todos/$id/show");
             exit;
         } else {
