@@ -5,12 +5,11 @@ namespace App\Controllers;
 use App\Models\Todo;
 use Framework\Controller;
 use Framework\Exceptions\PageNotFoundException;
-use Framework\Viewer;
 
 class Todos extends Controller
 {
 
-    public function __construct(private Viewer $viewer, private Todo $model)
+    public function __construct(private Todo $model)
     {
     }
 
