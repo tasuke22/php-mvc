@@ -58,7 +58,9 @@ class Todos
     {
         $data = [
             'title' => $_POST['title'],
-            'description' => $_POST['description']
+            'description' => empty($_POST['description']) ? null : $_POST['description'],
+            'completed' => $_POST['completed'],
+            'user_id' => $_POST['user_id'],
         ];
         var_dump($this->model->insert($data));
 

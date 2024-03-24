@@ -37,39 +37,28 @@ abstract class Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function find(string $id): array|bool
-    {
-        $conn = $this->db->getConnection();
-
-        $sql = "SELECT * FROM {$this->getTable()} WHERE id = :id";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
     public function insert(array $data): bool
     {
-        // 仮のデータ
-        $user_id = "860c602c-2b99-48b3-82b7-253f52ad9c7e";
-        $completed = 0;
-
         $columns = implode(", ", array_keys($data));
-        $placeholders =  implode(", ", array_fill(0, count($data), "?"));
+        $placeholders = implode(", ", array_fill(0, count($data), "?"));
 
         $sql = "INSERT INTO {$this->getTable()} ($columns) VALUES ($placeholders)";
 
-        exit($sql);
         $conn = $this->db->getConnection();
 
         $stmt = $conn->prepare($sql);
 
-        $stmt->bindValue(1, $data['title'], PDO::PARAM_STR);
-        $stmt->bindValue(2, $data['description'], PDO::PARAM_STR);
-        $stmt->bindValue(3, $completed, PDO::PARAM_INT);
-        $stmt->bindValue(4, $user_id, PDO::PARAM_STR);
+        $i = 1;
+        foreach ($data as $value) {
+            $type = match (gettype($value)) {
+                'boolean' => PDO::PARAM_BOOL,
+                'integer' => PDO::PARAM_INT,
+                'NULL' => PDO::PARAM_NULL,
+                default => PDO::PARAM_STR,
+            };
+
+            $stmt->bindValue($i++, $value, $type);
+        }
 
         return $stmt->execute();
     }
