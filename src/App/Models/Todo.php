@@ -9,5 +9,13 @@ use Framework\Model;
 class Todo extends Model
 {
     protected $table = 'todos';
+
+    protected function validate(array $data): bool
+    {
+        if (empty($data["title"])) {
+            return false;
+        }
+        return true;
+    }
 }
 
