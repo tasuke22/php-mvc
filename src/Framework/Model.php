@@ -20,6 +20,34 @@ abstract class Model
             return false;
         }
 
+        $sql = "UPDATE {$this->getTable()} SET ";
+
+        unset($data["id"]);
+
+        $assignments = array_keys($data);
+        array_walk($assignments, fn(&$value) => $value .= " = ?");
+        $sql .= implode(", ", $assignments);
+        $sql .= " WHERE id = ?";
+
+        $conn = $this->db->getConnection();
+
+        $stmt = $conn->prepare($sql);
+
+        $i = 1;
+        foreach ($data as $value) {
+            $type = match (gettype($value)) {
+                'boolean' => PDO::PARAM_BOOL,
+                'integer' => PDO::PARAM_INT,
+                'NULL' => PDO::PARAM_NULL,
+                default => PDO::PARAM_STR,
+            };
+
+            $stmt->bindValue($i++, $value, $type);
+        }
+
+        $stmt->bindValue($i, $id, PDO::PARAM_INT);
+        return $stmt->execute();
+
         return true;
     }
 
