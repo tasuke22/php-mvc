@@ -15,7 +15,6 @@ class Database
         private string $password
     )
     {
-        echo "Created Database object";
     }
 
     public function getConnection(): PDO

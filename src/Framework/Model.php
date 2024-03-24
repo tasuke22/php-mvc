@@ -59,6 +59,23 @@ abstract class Model
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function find(string $id): array|bool
+    {
+        $conn = $this->db->getConnection();
+
+        $sql = "SELECT *
+                FROM {$this->getTable()}
+                WHERE id = :id";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function insert(array $data): bool
     {
         $this->validate($data);
