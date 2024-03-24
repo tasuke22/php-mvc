@@ -24,6 +24,7 @@ abstract class Model
     public function __construct(private Database $db)
     {
     }
+
     public function findAll(): array
     {
         $pdo = $this->db->getConnection();
@@ -46,7 +47,26 @@ abstract class Model
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
         $stmt->execute();
-        return  $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function insert(array $data): bool
+    {
+        // 仮のデータ
+        $user_id = "860c602c-2b99-48b3-82b7-253f52ad9c7e";
+        $completed = 0;
+
+        $sql = "INSERT INTO {$this->getTable()} (title, description, completed, user_id) VALUES (?, ?, ?, ?)";
+        $conn = $this->db->getConnection();
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindValue(1, $data['title'], PDO::PARAM_STR);
+        $stmt->bindValue(2, $data['description'], PDO::PARAM_STR);
+        $stmt->bindValue(3, $completed, PDO::PARAM_INT);
+        $stmt->bindValue(4, $user_id, PDO::PARAM_STR);
+
+        return $stmt->execute();
     }
 }
 

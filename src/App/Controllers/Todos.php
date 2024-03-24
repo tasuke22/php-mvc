@@ -53,5 +53,15 @@ class Todos
 
         echo $this->viewer->render('Todos/new.php');
     }
+
+    public function create()
+    {
+        $data = [
+            'title' => $_POST['title'],
+            'description' => $_POST['description']
+        ];
+        var_dump($this->model->insert($data));
+
+    }
 }
 

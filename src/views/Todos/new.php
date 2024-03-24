@@ -1,6 +1,6 @@
 <h1>New Todo</h1>
 
-<form action="post">
+<form method="post" action="/todos/create">
 
   <lable for="title">Title</lable>
   <input type="text" name="title" id="title">
