@@ -40,6 +40,22 @@ class Todos
         ]);
     }
 
+    public function edit(string $id): void
+    {
+        $todo = $this->model->find($id);
+
+        if (!$todo) {
+            throw new PageNotFoundException();
+        }
+
+        echo $this->viewer->render("shared/header.php", [
+            'title' => 'Edit Todos'
+        ]);
+        echo $this->viewer->render('Todos/edit.php', [
+            'todo' => $todo
+        ]);
+    }
+
     public function showPage(string $title, string $id, string $page)
     {
         echo $title . " " . $id . " " . $page;
