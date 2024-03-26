@@ -8,7 +8,18 @@ class MVCTemplateViewer implements TemplateViewerInterface
 {
     public function render(string $template, array $data = []): string
     {
-        $code = file_get_contents(dirname(__DIR__) . "/views/$template");
+        $views_dir = dirname(__DIR__) . "/views/";
+        $code = file_get_contents($views_dir . "/$template");
+
+        if (preg_match('#^{% extends "(?<template>.*)" %}#', $code, $matches) === 1) {
+
+            $base = file_get_contents($views_dir . $matches['template']);
+
+            exit($base);
+
+        }
+
+
         $code = $this->replaceVariables($code);
         $code = $this->replacePHP($code);
 

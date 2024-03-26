@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>{{ title }}</title>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-</head>
-<body>
+{% extends "base.mvc.php" %}
 
-<h1>Todos</h1>
+{% block title %}Todos{% endblock %}
+
+{% block body %}
 
 <a href="/todos/new">New Todo</a>
 
@@ -22,3 +17,5 @@
   </h2>
 
 {% endforeach; %}
+
+{% endblock %}
