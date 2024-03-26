@@ -17,10 +17,8 @@ class Todos extends Controller
     {
         $todos = $this->model->findAll();
 
-        echo $this->viewer->render("shared/header.php", [
-            'title' => 'Todos'
-        ]);
-        echo $this->viewer->render('Todos/index.php', [
+        echo $this->viewer->render('Todos/index.mvc.php', [
+            'title' => 'Todos',
             'todos' => $todos,
             "total" => $this->model->getTotal()
         ]);
