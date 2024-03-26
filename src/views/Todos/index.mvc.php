@@ -13,7 +13,7 @@
 
 <p>Total: {{ total }}</p>
 
-<?php foreach ($todos as $todo): ?>
+{% foreach ($todos as $todo): %}
 
   <h2>
     <a href="/todos/{{ todo["id"] }}/show">
@@ -21,7 +21,4 @@
     </a>
   </h2>
 
-<?php endforeach; ?>
-
-</body>
-</html>
+{% endforeach; %}
