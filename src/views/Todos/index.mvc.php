@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="js">
+<html>
 <head>
-  <title><?= $title ?></title>
+  <title>{{ title }}</title>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </head>
 <body>
 
@@ -10,15 +11,16 @@
 
 <a href="/todos/new">New Todo</a>
 
-<p>Total: <?= $total ?></p>
+<p>Total: {{ total }}</p>
 
 <?php foreach ($todos as $todo): ?>
+
   <h2>
-    <a href="/todos/<?= $todo["id"] ?>/show">
-        <?= htmlspecialchars($todo["title"]) ?>
+    <a href="/todos/{{ todo["id"] }}/show">
+    {{ todo["title"] }}
     </a>
   </h2>
-  <p><?= htmlspecialchars($todo["description"]) ?></p>
+
 <?php endforeach; ?>
 
 </body>
