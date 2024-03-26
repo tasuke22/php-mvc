@@ -1,11 +1,12 @@
 <?php
 
-namespace app\Framework;
+namespace Framework;
 
 class MVCTemplateViewer implements TemplateViewerInterface
 {
     public function render(string $template, array $data = []): string
     {
+        echo "MVCTemplateViewer class here";
         extract($data, EXTR_SKIP);
         ob_start();
 

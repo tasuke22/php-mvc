@@ -1,5 +1,7 @@
 <?php
 
+use Framework\TemplateViewerInterface;
+
 $container = new Framework\Container;
 
 
@@ -10,6 +12,10 @@ $container->set(App\Database::class, function () {
         $_ENV["MYSQL_USER"],
         $_ENV["MYSQL_PASSWORD"],
     );
+});
+
+$container->set(TemplateViewerInterface::class, function () {
+    return new Framework\MVCTemplateViewer;
 });
 
 
