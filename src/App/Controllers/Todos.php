@@ -44,10 +44,7 @@ class Todos extends Controller
             throw new PageNotFoundException();
         }
 
-        echo $this->viewer->render("shared/header.php", [
-            'title' => 'Edit Todos'
-        ]);
-        echo $this->viewer->render('Todos/edit.php', [
+        echo $this->viewer->render('Todos/edit.mvc.php', [
             'todo' => $todo
         ]);
     }
@@ -109,11 +106,7 @@ class Todos extends Controller
             header("Location: /todos/$id/show");
             exit;
         } else {
-            echo $this->viewer->render("shared/header.php", [
-                'title' => 'Edit Todo'
-            ]);
-
-            echo $this->viewer->render('Todos/edit.php', [
+            echo $this->viewer->render('Todos/edit.mvc.php', [
                 'errors' => $this->model->getErrors(),
                 "todo" => $todo
             ]);
@@ -124,11 +117,7 @@ class Todos extends Controller
     {
         $todo = $this->getTodo($id);
 
-        echo $this->viewer->render("shared/header.php", [
-            'title' => 'Delete Todo'
-        ]);
-
-        echo $this->viewer->render('Todos/delete.php', [
+        echo $this->viewer->render('Todos/delete.mvc.php', [
             'todo' => $todo
         ]);
     }

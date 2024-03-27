@@ -2,7 +2,7 @@
 <input type="text" name="title" id="title" value="{{ todo["title"] ?? "" }}">
 
 {% if (isset($errors['title'])): %}
-<p>{{ errors['title'] }}</p>
+    <p>{{ errors['title'] }}</p>
 {% endif; %}
 
 <label for="description">Description</label>
