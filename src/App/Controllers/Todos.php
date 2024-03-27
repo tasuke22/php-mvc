@@ -24,7 +24,7 @@ class Todos extends Controller
             ]);
     }
 
-    public function show(string $id): void
+    public function show(string $id): Response
     {
         $todo = $this->getTodo($id);
 
@@ -32,12 +32,12 @@ class Todos extends Controller
             throw new PageNotFoundException();
         }
 
-        echo $this->viewer->render('Todos/show.mvc.php', [
+        return $this->view('Todos/show.mvc.php', [
             'todo' => $todo
         ]);
     }
 
-    public function edit(string $id): void
+    public function edit(string $id): Response
     {
         $todo = $this->getTodo($id);
 
@@ -45,7 +45,7 @@ class Todos extends Controller
             throw new PageNotFoundException();
         }
 
-        echo $this->viewer->render('Todos/edit.mvc.php', [
+        return $this->view('Todos/edit.mvc.php', [
             'todo' => $todo
         ]);
     }
@@ -65,12 +65,12 @@ class Todos extends Controller
         echo $title . " " . $id . " " . $page;
     }
 
-    public function new()
+    public function new(): Response
     {
-        echo $this->viewer->render('Todos/new.mvc.php');
+        return $this->view('Todos/new.mvc.php');
     }
 
-    public function create()
+    public function create(): Response
     {
         $data = [
             'title' => $this->request->post['title'],
@@ -83,14 +83,14 @@ class Todos extends Controller
             header("Location: /todos/{$this->model->getInsertId()}/show");
             exit;
         } else {
-            echo $this->viewer->render('Todos/new.mvc.php', [
+            return $this->view('Todos/new.mvc.php', [
                 'errors' => $this->model->getErrors(),
                 'todo' => $data
             ]);
         }
     }
 
-    public function update(string $id)
+    public function update(string $id): Response
     {
         $todo = $this->getTodo($id);
 
@@ -107,23 +107,23 @@ class Todos extends Controller
             header("Location: /todos/$id/show");
             exit;
         } else {
-            echo $this->viewer->render('Todos/edit.mvc.php', [
+            return $this->view('Todos/edit.mvc.php', [
                 'errors' => $this->model->getErrors(),
                 "todo" => $todo
             ]);
         }
     }
 
-    public function delete(string $id): void
+    public function delete(string $id): Response
     {
         $todo = $this->getTodo($id);
 
-        echo $this->viewer->render('Todos/delete.mvc.php', [
+        return $this->view('Todos/delete.mvc.php', [
             'todo' => $todo
         ]);
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): Response
     {
         $todo = $this->getTodo($id);
 
