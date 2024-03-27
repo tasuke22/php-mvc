@@ -7,7 +7,7 @@ $router->add("/{title}/{id:\d+}/{page:\d+}", ["controller" => "todos", "action" 
 $router->add("/todo/{slug:[\w-]+}", ["controller" => "todos", "action" => "show"]);
 
 //$router->add("/{controller}/{id:\d+}/{action}");
-$router->add("/{controller}/{id:\d+}/show", ["action" => "show", "middleware" => "message|trim"]);
+$router->add("/{controller}/{id:\d+}/show", ["action" => "show", "middleware" => "message|message"]);
 $router->add("/{controller}/{id:\d+}/edit", ["action" => "edit"]);
 $router->add("/{controller}/{id:\d+}/update", ["action" => "update"]);
 $router->add("/{controller}/{id:\d+}/delete", ["action" => "delete"]);
