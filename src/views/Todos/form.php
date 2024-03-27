@@ -1,12 +1,12 @@
 <lable for="title">Title</lable>
-<input type="text" name="title" id="title" value="{{ todo["title"] ?? "" }}">
+<input type="text" id="name" name="title" value="{{ todo["title"] }}">
 
 {% if (isset($errors['title'])): %}
     <p>{{ errors['title'] }}</p>
 {% endif; %}
 
 <label for="description">Description</label>
-<textarea name="description" id="description">{{ todo["description"] ?? "" }}</textarea>
+<textarea id="description" name="description">{{ todo["description"] }}</textarea>
 
 <lable for="completed">Completed</lable>
 <input value="0" name="completed" id="completed">
