@@ -18,7 +18,6 @@ class Todos extends Controller
         $todos = $this->model->findAll();
 
         echo $this->viewer->render('Todos/index.mvc.php', [
-            'title' => 'Todos',
             'todos' => $todos,
             "total" => $this->model->getTotal()
         ]);
@@ -32,10 +31,7 @@ class Todos extends Controller
             throw new PageNotFoundException();
         }
 
-        echo $this->viewer->render("shared/header.php", [
-            'title' => 'Todos'
-        ]);
-        echo $this->viewer->render('Todos/show.php', [
+        echo $this->viewer->render('Todos/show.mvc.php', [
             'todo' => $todo
         ]);
     }
