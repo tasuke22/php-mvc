@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace app\App\Middleware;
+namespace App\Middleware;
 
 use Framework\Request;
 use Framework\RequestHandlerInterface;

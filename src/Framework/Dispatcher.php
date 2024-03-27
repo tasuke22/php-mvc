@@ -2,6 +2,7 @@
 
 namespace Framework;
 
+use App\Middleware\ChangeResponseExample;
 use Framework\Exceptions\PageNotFoundException;
 use ReflectionMethod;
 use UnexpectedValueException;
@@ -34,7 +35,8 @@ class Dispatcher
 
         $controller_handler = new ControllerRequestHandler($controller_object, $action, $args);
 
-        return $controller_handler->handle($request);
+        $middleware = $this->container->get(ChangeResponseExample::class);
+        return $middleware->process($request, $controller_handler);
     }
 
     private function getActionArguments(string $controller, string $action, array $params): array
