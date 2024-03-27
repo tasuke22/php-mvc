@@ -128,5 +128,13 @@ class Todos extends Controller
         $this->model->delete($id);
         return $this->redirect("/todos/index");
     }
+
+    public function responseCodeExample(): Response
+    {
+        $this->response->setStatusCode(451);
+        $this->response->setBody('Unavailable For Legal Reasons');
+
+        return $this->response;
+    }
 }
 
