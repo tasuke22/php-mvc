@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Todo;
 use Framework\Controller;
 use Framework\Exceptions\PageNotFoundException;
+use Framework\Response;
 
 class Todos extends Controller
 {
@@ -13,7 +14,7 @@ class Todos extends Controller
     {
     }
 
-    public function index(): void
+    public function index(): Response
     {
         $todos = $this->model->findAll();
 
@@ -24,7 +25,7 @@ class Todos extends Controller
             ])
         );
 
-        $this->response->send();
+        return $this->response;
     }
 
     public function show(string $id): void

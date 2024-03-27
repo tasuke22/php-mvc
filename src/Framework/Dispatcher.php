@@ -12,7 +12,7 @@ class Dispatcher
     {
     }
 
-    public function handle(Request $request)
+    public function handle(Request $request): Response
     {
         $path = $this->getPath($request->path);
 
@@ -33,7 +33,7 @@ class Dispatcher
 
         $args = $this->getActionArguments($controller, $action, $params);
 
-        $controller_object->$action(...$args);
+        return $controller_object->$action(...$args);
 
     }
 
