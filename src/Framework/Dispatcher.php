@@ -37,7 +37,7 @@ class Dispatcher
 
         $middleware = $this->container->get(ChangeResponseExample::class);
 
-        $middleware_handler = new MiddlewareRequestHandler([$middleware], $controller_handler);
+        $middleware_handler = new MiddlewareRequestHandler([$middleware, clone $middleware, clone $middleware], $controller_handler);
         return $middleware_handler->handle($request);
     }
 
