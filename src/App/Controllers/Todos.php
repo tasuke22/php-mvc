@@ -17,10 +17,14 @@ class Todos extends Controller
     {
         $todos = $this->model->findAll();
 
-        echo $this->viewer->render('Todos/index.mvc.php', [
-            'todos' => $todos,
-            "total" => $this->model->getTotal()
-        ]);
+        $this->response->setBody(
+            $this->viewer->render('Todos/index.mvc.php', [
+                'todos' => $todos,
+                "total" => $this->model->getTotal()
+            ])
+        );
+
+        $this->response->send();
     }
 
     public function show(string $id): void
