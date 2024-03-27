@@ -69,11 +69,7 @@ class Todos extends Controller
 
     public function new()
     {
-        $this->viewer->render("shared/header.php", [
-            'title' => 'New Todo'
-        ]);
-
-        echo $this->viewer->render('Todos/new.php');
+        echo $this->viewer->render('Todos/new.mvc.php');
     }
 
     public function create()
@@ -89,11 +85,7 @@ class Todos extends Controller
             header("Location: /todos/{$this->model->getInsertId()}/show");
             exit;
         } else {
-            echo $this->viewer->render("shared/header.php", [
-                'title' => 'New Todo'
-            ]);
-
-            echo $this->viewer->render('Todos/new.php', [
+            echo $this->viewer->render('Todos/new.mvc.php', [
                 'errors' => $this->model->getErrors(),
                 'todo' => $data
             ]);
