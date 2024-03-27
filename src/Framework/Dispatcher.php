@@ -2,15 +2,13 @@
 
 namespace Framework;
 
-use App\Middleware\ChangeRequestExample;
-use App\Middleware\ChangeResponseExample;
 use Framework\Exceptions\PageNotFoundException;
 use ReflectionMethod;
 use UnexpectedValueException;
 
 class Dispatcher
 {
-    public function __construct(private Router $router, private Container $container)
+    public function __construct(private Router $router, private Container $container, private array $middleware_classes)
     {
     }
 
@@ -36,8 +34,9 @@ class Dispatcher
 
         $controller_handler = new ControllerRequestHandler($controller_object, $action, $args);
 
-        $middleware = $this->container->get(ChangeResponseExample::class);
-        $middleware2 = $this->container->get(ChangeRequestExample::class);
+        $middleware = $this->getMiddleware($params);
+        print_r($middleware);
+        exit;
 
         $middleware_handler = new MiddlewareRequestHandler([
             $middleware2,
@@ -45,6 +44,15 @@ class Dispatcher
             clone $middleware,
             clone $middleware], $controller_handler);
         return $middleware_handler->handle($request);
+    }
+
+    private function getMiddleware(array $params): array
+    {
+        if (!array_key_exists("middleware", $params)) {
+            return [];
+        }
+        $middleware = explode("|", $params["middleware"]);
+        return $middleware;
     }
 
     private function getActionArguments(string $controller, string $action, array $params): array
