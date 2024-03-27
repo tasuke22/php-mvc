@@ -80,8 +80,7 @@ class Todos extends Controller
         ];
 
         if ($this->model->insert($data)) {
-            header("Location: /todos/{$this->model->getInsertId()}/show");
-            exit;
+            return $this->redirect("/todos/{$this->model->getInsertId()}/show");
         } else {
             return $this->view('Todos/new.mvc.php', [
                 'errors' => $this->model->getErrors(),
@@ -104,8 +103,7 @@ class Todos extends Controller
         $todo['user_id'] = $this->request->post['user_id'];
 
         if ($this->model->update($id, $todo)) {
-            header("Location: /todos/$id/show");
-            exit;
+            return $this->redirect("/todos/$id/show");
         } else {
             return $this->view('Todos/edit.mvc.php', [
                 'errors' => $this->model->getErrors(),
@@ -128,8 +126,7 @@ class Todos extends Controller
         $todo = $this->getTodo($id);
 
         $this->model->delete($id);
-        header("Location: /todos/index");
-        exit;
+        return $this->redirect("/todos/index");
     }
 }
 
