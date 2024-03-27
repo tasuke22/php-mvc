@@ -2,6 +2,7 @@
 
 namespace Framework;
 
+use App\Middleware\ChangeRequestExample;
 use App\Middleware\ChangeResponseExample;
 use Framework\Exceptions\PageNotFoundException;
 use ReflectionMethod;
@@ -36,8 +37,13 @@ class Dispatcher
         $controller_handler = new ControllerRequestHandler($controller_object, $action, $args);
 
         $middleware = $this->container->get(ChangeResponseExample::class);
+        $middleware2 = $this->container->get(ChangeRequestExample::class);
 
-        $middleware_handler = new MiddlewareRequestHandler([$middleware, clone $middleware, clone $middleware], $controller_handler);
+        $middleware_handler = new MiddlewareRequestHandler([
+            $middleware2,
+            $middleware,
+            clone $middleware,
+            clone $middleware], $controller_handler);
         return $middleware_handler->handle($request);
     }
 
