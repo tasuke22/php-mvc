@@ -18,14 +18,10 @@ class Todos extends Controller
     {
         $todos = $this->model->findAll();
 
-        $this->response->setBody(
-            $this->viewer->render('Todos/index.mvc.php', [
+        return $this->view('Todos/index.mvc.php', [
                 'todos' => $todos,
                 "total" => $this->model->getTotal()
-            ])
-        );
-
-        return $this->response;
+            ]);
     }
 
     public function show(string $id): void
